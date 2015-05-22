@@ -13,12 +13,18 @@ import (
 
 
 type OTP struct {
-	Key string
-	Offset int
-	Algorithm string
-	Digits int
-	TimeDiv int
-	AlignKey bool
+	//Secret key
+	Key string 
+	//Counter
+	Offset int 
+	//sha1, sha256, sha512
+	Algorithm string 
+	//How many digits to be generated
+	Digits int 
+	//How is the Offset devided. Cound be 30 fot TOTP or 1 for HOTP
+	TimeDiv int 
+	//The document suggest that you should align the key to the size of the algorithm. Safe option is set it to true
+	AlignKey bool 
 }
 
 func uint64tobyte(a uint64) [8]byte {
@@ -35,7 +41,9 @@ func uint64tobyte(a uint64) [8]byte {
 	return r
 }
 
-
+/*
+	Return the otp password
+*/
 func (o *OTP) GetKey() string {
 	
 	var f func() hash.Hash
